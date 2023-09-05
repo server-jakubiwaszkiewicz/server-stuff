@@ -1,0 +1,72 @@
+{
+	"apps": {
+		"http": {
+			"servers": {
+				"srv0": {
+					"listen": [
+						":443"
+					],
+					"routes":[
+                        {
+							"handle": [
+	                                {
+                                        "handler": "subroute",
+                                        "routes":[
+                                            {
+                                                "handle": [
+                                                    {
+                                                        "handler":"reverse_proxy",
+                                                        "upstreams": [
+                                                            {
+                                                                "dial":"localhost:3001"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                            ],
+                            "match":[
+                                {
+                                    "host":[
+                                        "server.iw4sz.pl"
+                                    ]
+                                }
+                            ],
+                            "terminal": true
+                        },
+                        {
+                            "handle": [
+                                    {
+                                        "handler": "subroute",
+                                        "routes":[
+                                            {
+                                                "handle": [
+                                                    {
+                                                        "handler":"reverse_proxy",
+                                                        "upstreams": [
+                                                            {
+                                                                "dial":"localhost:3000"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                            ],
+                            "match":[
+                                {
+                                    "host":[
+                                        "portfolio.iw4sz.pl"
+                                    ]
+                                }
+                            ],
+                            "terminal": true
+                        }]
+                    }
+                }
+            }
+        }
+}
