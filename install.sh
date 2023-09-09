@@ -1,12 +1,23 @@
 #!/bin/bash
 echo "This script is prepared for Ubuntu 20.04 LTS"
-echo "Do you want to install Docker? (y/n)"
-read answer
 
 if [ "$EUID" -ne 0 ]; then
     echo "Please run this script as root."
     exit 1
 fi
+
+echo "Do you want to add password for kkubaiwaszkiewicz? (y/n)"
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    echo "Adding password..."
+    passwd kkubaiwaszkiewicz
+else
+    echo "Ok..."
+fi
+
+echo "Do you want to install Docker? (y/n)"
+read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     echo "Installing Docker..."
