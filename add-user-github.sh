@@ -11,7 +11,7 @@ fi
 if id "$USERNAME" &>/dev/null; then
     echo "User '$USERNAME' already exists."
 else
-    useradd -m "$USERNAME"
+    adduser -m "$USERNAME"
     echo "$USERNAME:$PASSWORD" | chpasswd
     usermod -aG sudo "$USERNAME"
 
