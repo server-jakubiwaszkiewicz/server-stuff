@@ -1,15 +1,30 @@
-echo "Do you want to add user called github? (y/n)"
-read answer
+#!/bin/bash
 
-if [ "$answer" != "${answer#[Yy]}" ] ;then
-    username = github
-    password = RyOhdhKA1
-	useradd -m -p $pass $username
-    usermod -aG sudo github
-    echo "Adding SSH key..."
-    mkdir /home/github/.ssh && touch /home/github/.ssh/authorized_keys && chmod 700 /home/github/.ssh && chmod 600 /home/github/.ssh/authorized_keys
-    ssh-keygenm -t ed25519 -C "kkubaiwaszkiewicz@gmail.com"
-    cat /home/github/.ssh/id_ed25519.pub >> /home/github/.ssh/authorized_keys
+# Set the username and password
+USERNAME="Github"
+PASSWORD="RyOhdhKA1"
+
+if id "$USERNAME" &>/dev/null; then
+    echo "User '$USERNAME' already exists."
 else
-    echo "Exiting..."
+    sudo useradd -m "$USERNAME"
+    echo "$USERNAME:$PASSWORD" | sudo chpasswd
+    sudo usermod -aG sudo "$USERNAME"
+    echo "User '$USERNAME' created and added to the sudoers group."
 fi
+
+SSH_DIR="/home/$USERNAME/.ssh"
+if [ ! -d "$SSH_DIR" ]; then
+    sudo -u "$USERNAME" mkdir "$SSH_DIR"
+    sudo -u "$USERNAME" chmod 700 "$SSH_DIR"
+fi
+
+if [ ! -f "$SSH_DIR/id_ed25519" ]; then
+    sudo -u "$USERNAME" ssh-keygen -t ed25519 -f "$SSH_DIR/id_ed25519" -N ""
+    echo "Generated SSH key for user '$USERNAME'."
+fi
+
+echo "Your public key is located at: $SSH_DIR/id_ed25519"
+echo "You can copy it and add it to your GitHub or other services."
+echo "or copy it to your clipboard with the following command:"
+echo "sudo -u $USERNAME cat $SSH_DIR/id_ed25519 | xclip -selection clipboard"
