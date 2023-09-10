@@ -57,13 +57,23 @@ else
     echo "Ok..."
 fi
 
-echo "Do you want to add user called github? (y/n)"
+echo "Do you want to install PostgreSQL DB? (y/n)"
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    sudo apt update
+    sudo apt install postgresql postgresql-contrib
+else
+    echo "Ok..."
+fi
+
+echo "Do you want to add user called Github? (y/n)"
 read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     ./add-user-github.sh
 else
-    echo "Exiting..."
+    echo "Ok..."
 fi
 
 echo "Do you want to load Caddy config? (y/n)"
