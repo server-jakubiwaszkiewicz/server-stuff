@@ -29,5 +29,9 @@ if [ ! -f "$SSH_DIR/id_ed25519" ]; then
     echo "Generated SSH key for user '$USERNAME'."
 fi
 
-echo "Your public key is located at: $SSH_DIR/id_ed25519.pub"
-echo "You can copy it and add it to your GitHub or other services."
+if [ ! -f "$SSH_DIR/authorized_keys" ]; then
+    sudo -u "$USERNAME" touch "$SSH_DIR/authorized_keys"
+    sudo -u "$USERNAME" chmod 600 "$SSH_DIR/authorized_keys"
+    echo "Created authorized_keys file for user '$USERNAME'."
+    sudo -u "$USERNAME" cat "$SSH_DIR/id_ed25519.pub" >> "$SSH_DIR/authorized_keys"
+fi
