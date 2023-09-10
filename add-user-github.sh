@@ -27,11 +27,8 @@ fi
 if [ ! -f "$SSH_DIR/id_ed25519" ]; then
     sudo -u "$USERNAME" ssh-keygen -t ed25519 -f "$SSH_DIR/id_ed25519" -N ""
     echo "Generated SSH key for user '$USERNAME'."
+    sudo -u "$USERNAME" chmod 600 "$SSH_DIR/id_ed25519"
+    sudo -u "$USERNAME" chmod 644 "$SSH_DIR/id_ed25519.pub"
+    sudo -u touch "$SSH_DIR/authorized_keys" && sudo -u chmod 600 "$SSH_DIR/authorized_keys" && sudo -u cat "$SSH_DIR/id_ed25519.pub" >> "$SSH_DIR/authorized_keys"
 fi
 
-if [ ! -f "$SSH_DIR/authorized_keys" ]; then
-    sudo -u "$USERNAME" touch "$SSH_DIR/authorized_keys"
-    sudo -u "$USERNAME" chmod 600 "$SSH_DIR/authorized_keys"
-    echo "Created authorized_keys file for user '$USERNAME'."
-    sudo -u "$USERNAME" cat "$SSH_DIR/id_ed25519.pub" >> "$SSH_DIR/authorized_keys"
-fi

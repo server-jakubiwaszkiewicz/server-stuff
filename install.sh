@@ -65,3 +65,14 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
 else
     echo "Exiting..."
 fi
+
+echo "Do you want to load Caddy config? (y/n)"
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    curl "http://localhost:2019/load" \
+	    -H "Content-Type: application/json" \
+	    -d @caddy.json
+else
+    echo "Exiting..."
+fi
