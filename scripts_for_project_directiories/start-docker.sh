@@ -59,6 +59,6 @@ echo "Building Docker image and running container..."
 docker build -t "$container_name" .
 
 # Run a container from the built image and map port from .env variable
-docker run -dp "$port:$port" "$container_name" "$container_name"
+docker run -dp "$port:$port" --name "$container_name" "$container_name"
 
 echo "Docker image and container created."
