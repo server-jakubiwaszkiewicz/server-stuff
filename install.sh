@@ -62,6 +62,7 @@ read answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     ./add-user-github.sh
+    sudo usermod -aG docker Github
 else
     echo "Ok..."
 fi
