@@ -64,7 +64,64 @@
                                 }
                             ],
                             "terminal": true
-                        }]
+                        },{
+                            "handle": [
+                                    {
+                                        "handler": "subroute",
+                                        "routes":[
+                                            {
+                                                "handle": [
+                                                    {
+                                                        "handler":"reverse_proxy",
+                                                        "upstreams": [
+                                                            {
+                                                                "dial":"localhost:3002"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                            ],
+                            "match":[
+                                {
+                                    "host":[
+                                        "magdalenacalus.iw4sz.pl"
+                                    ]
+                                }
+                            ],
+                            "terminal": true
+                        },{
+                            "handle": [
+                                    {
+                                        "handler": "subroute",
+                                        "routes":[
+                                            {
+                                                "handle": [
+                                                    {
+                                                        "handler":"reverse_proxy",
+                                                        "upstreams": [
+                                                            {
+                                                                "dial":"localhost:3003"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                            ],
+                            "match":[
+                                {
+                                    "host":[
+                                        "api-magdalenacalus.iw4sz.pl"
+                                    ]
+                                }
+                            ],
+                            "terminal": true
+                        }
+                    ]
                     }
                 }
             }
