@@ -18,7 +18,7 @@
                                                         "handler":"reverse_proxy",
                                                         "upstreams": [
                                                             {
-                                                                "dial":"localhost:3001"
+                                                                "dial":"localhost:3000"
                                                             }
                                                         ]
                                                     }
@@ -30,7 +30,7 @@
                             "match":[
                                 {
                                     "host":[
-                                        "api.portfoilo.iw4sz.pl"
+                                        "portfoilo.iw4sz.pl"
                                     ]
                                 }
                             ],
@@ -47,7 +47,7 @@
                                                         "handler":"reverse_proxy",
                                                         "upstreams": [
                                                             {
-                                                                "dial":"localhost:3000"
+                                                                "dial":"localhost:3001"
                                                             }
                                                         ]
                                                     }
@@ -59,7 +59,7 @@
                             "match":[
                                 {
                                     "host":[
-                                        "magdalenacalus.iw4sz.pl"
+                                        "api-portfolio.iw4sz.pl"
                                     ]
                                 }
                             ],
@@ -88,12 +88,13 @@
                             "match":[
                                 {
                                     "host":[
-                                        "portfolio.iw4sz.pl"
+                                        "magdalenacalus.iw4sz.pl"
                                     ]
                                 }
                             ],
                             "terminal": true
-                        }]
+                        }
+                    ]
                     }
                 }
             }
